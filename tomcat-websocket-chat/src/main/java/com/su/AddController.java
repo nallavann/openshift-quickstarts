@@ -19,6 +19,8 @@ public class AddController {
 			
 			ModelAndView result = new ModelAndView("display");
 			result.addObject("result",k);
+			System.out.println(System.getenv("POSTGRESQL_USER"));
+			System.out.println(System.getenv("POSTGRESQL_PASSWORD"));
 			return result;
 		}
 }
