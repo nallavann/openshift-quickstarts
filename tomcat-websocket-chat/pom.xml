@@ -41,11 +41,14 @@
         <version.jboss.logging>3.1.4.GA-redhat-2</version.jboss.logging>
 
         <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <org.springframework-version>4.1.1.RELEASE</org.springframework-version>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <org.springframework-version>4.3.2.RELEASE</org.springframework-version>
+         <hibernate.version>5.0.6.Final</hibernate.version>
+         <mysql.version>6.0.6</mysql.version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<apachetiles.version>3.0.7</apachetiles.version>
     </properties>
 
 
@@ -65,28 +68,53 @@
         <dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-context</artifactId>
-	        <version>4.1.6.RELEASE</version>
+	        <version>${org.springframework-version}</version>
 	    </dependency>
+	    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+		<dependency>
+		    <groupId>org.jboss.logging</groupId>
+		    <artifactId>jboss-logging</artifactId>
+		    <version>3.3.1.Final</version>
+		</dependency>
+		
+		 <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>	
+        <!-- https://mvnrepository.com/artifact/javax.transaction/jta -->
+		<dependency>
+		    <groupId>javax.transaction</groupId>
+		    <artifactId>jta</artifactId>
+		    <version>1.1</version>
+		</dependency>
 	    <dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-aop</artifactId>
-	        <version>4.1.6.RELEASE</version>
+	        <version>${org.springframework-version}</version>
 	    </dependency>
 	    <dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-webmvc</artifactId>
-	        <version>4.1.6.RELEASE</version>
+	        <version>${org.springframework-version}</version>
 	    </dependency>
 	    <dependency>
 	        <groupId>org.springframework</groupId>
 	        <artifactId>spring-web</artifactId>
-	        <version>4.1.6.RELEASE</version>
+	        <version>${org.springframework-version}</version>
 	    </dependency>
 	    <dependency>
-	    	<groupId>javax.servlet</groupId>
-	    	<artifactId>jstl</artifactId>
-	    	<version>1.2</version>
-		</dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-tx</artifactId>
+	        <version>${org.springframework-version}</version>
+	    </dependency>
+	    
         <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
@@ -94,10 +122,82 @@
 		    <version>3.0.1</version>
 		    <scope>provided</scope>
 		</dependency>
-		        
+		<!-- Hibernate 4 dependencies -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+  		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-api -->
+		<dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-core</artifactId>
+            <version>${apachetiles.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-api</artifactId>
+            <version>${apachetiles.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-servlet</artifactId>
+            <version>${apachetiles.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>${apachetiles.version}</version>
+		 </dependency>
+		 <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>${apachetiles.version}</version>
+		 </dependency> 		
+        <!--MYSQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>     
+        <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+<dependency>
+    <groupId>jstl</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+           
     </dependencies>
 
     <build>
+    <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <!-- Maven will append the version to the finalName (which is the name 
             given to the generated war, and hence the context root) -->
         <finalName>${project.artifactId}</finalName>
